@@ -37,5 +37,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: "{{defaultContext}}:docker"
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sammwise:latest
