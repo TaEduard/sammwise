@@ -4,6 +4,7 @@ FROM node:16.13-alpine AS deps
 RUN apk add --no-cache libc6-compat
 RUN ls
 WORKDIR /app
+RUN ls
 COPY package.json package-lock.json ./
 RUN npm install --frozen-lockfile
 
