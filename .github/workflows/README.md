@@ -34,7 +34,7 @@ secrets:
 1. The Docker image is pushed to Docker Hub and GitHub Container Registry.
 
 ## Acknowledgements
-This Github Action was adapted from the Build and Push Docker Image action by Docker.
+This Github Action was adapted from the [Build and Push Docker Image action by Docker](https://github.com/marketplace/actions/build-and-push-docker-images).
 
 
 
