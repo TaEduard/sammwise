@@ -1,5 +1,15 @@
 # Install dependencies only when needed
 FROM node:16.13-alpine AS deps
+# genenv
+RUN --mount=type=secret,id=ARTIFACTORY_TOKEN \
+    --mount=type=secret,id=ARTIFACTORY_EMAIL \
+    --mount=type=secret,id=ARTIFACTORY_URL \
+    --mount=type=secret,id=ARTIFACTORY_REPO \
+    sed -i 's/ARTIFACTORY_TOKEN/$(cat /run/secrets/ARTIFACTORY_TOKEN)/g' .npmrc && \
+    sed -i 's/ARTIFACTORY_EMAIL/$(cat /run/secrets/ARTIFACTORY_EMAIL)/g' .npmrc && \
+    sed -i 's/ARTIFACTORY_URL/$(cat /run/secrets/ARTIFACTORY_URL)/g' .npmrc && \
+    sed -i 's/ARTIFACTORY_REPO/$(cat /run/secrets/ARTIFACTORY_REPO)/g' .npmrc 
+
 COPY .npmrc /usr/src/app/.npmrc
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
