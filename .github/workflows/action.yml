@@ -25,13 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # Runs a single command using the runners shell
-      - name: Inject Artifactory credentials
-        run: |
-          sed -i 's/ARTIFACTORY_TOKEN/${{ secrets.ARTIFACTORY_TOKEN }}/g' .npmrc
-          sed -i 's/ARTIFACTORY_EMAIL/${{ secrets.ARTIFACTORY_EMAIL }}/g' .npmrc
-          sed -i 's/ARTIFACTORY_URL/${{ secrets.ARTIFACTORY_URL }}/g' .npmrc
-          sed -i 's/ARTIFACTORY_REPO/${{ secrets.ARTIFACTORY_REPO }}/g' .npmrc
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -58,4 +51,9 @@ jobs:
             taeduard/sammwise:latest
             ghcr.io/taeduard/sammwise:latest
 #            ghcr.io/${{ github.repository_owner }}/sammwise:latest
-            
+          secrets: |
+            "ARTIFACTORY_TOKEN=${{ secrets.ARTIFACTORY_TOKEN}}"
+            "ARTIFACTORY_EMAIL=${{ secrets.ARTIFACTORY_EMAIL}}"
+            "ARTIFACTORY_URL=${{ secrets.ARTIFACTORY_URL}}"
+            "ARTIFACTORY_REPO=${{ secrets.ARTIFACTORY_REPO }}"
+
